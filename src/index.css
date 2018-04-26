@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.flex-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+button {
+	margin: 20px 0;
+	padding: 12px 24px;
+	border-radius: 12px;
+	border: none;
+	font-size: 20px;
+}
+
+button:enabled {
+	background-color: crimson;
+	color: #FFF;
+	cursor: pointer;
+}
+
+button:disabled {
+	background-color: #999;
+	color: #CCC;
+}
+
+ul.repo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.repo-item {
+  margin: 20px;
+  text-align: center;
+}
+
+.space-list-items {
+  margin-bottom: 7px;
+}
+
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.popular-rank {
+  font-size: 2rem;
+}
+
