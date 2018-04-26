@@ -73,7 +73,8 @@ function RepoGrid({ repos }) {
 class App extends Component {
   state = {
     repos: null,
-    repoUrls: []
+    repoUrls: [],
+    loading: false
   }
 
   handleChange = (event) => {
@@ -84,8 +85,9 @@ class App extends Component {
   }
 
   doSort = async () => {
+    this.setState(() => ({loading: true}))
     const repos = await fetchRepos(this.state.repoUrls)
-    this.setState(() => ({repos}))
+    this.setState(() => ({repos, loading: false}))
   }
 
   doReset = () => {
@@ -95,25 +97,30 @@ class App extends Component {
   }
 
   render() {
-    const {repos, repoUrls} = this.state
+    const {loading, repos, repoUrls} = this.state
     return (
       <div className="App" style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
         <h1>Github Repo Ranker</h1>
         <p>Sort a list of github repos by stars!</p>
 
-        {!repos &&
+        {!repos && !loading &&
           <div className="flex-center">
             <h4>Paste in the URIs for github repos, one URI per line!</h4>
             <textarea 
-            style={{width: 600, height: 120}}
-            onChange={this.handleChange}
-            ></textarea>
+              style={{width: 600, height: 120}}
+              onChange={this.handleChange}
+              value={repoUrls.join('\n')}>
+            </textarea>
 
             <button 
               onClick={this.doSort}
               disabled={repoUrls.length < 2}
             >Sort!</button>
           </div>
+        }
+
+        {loading &&
+          <h4>Loading...</h4>
         }
 
         {repos &&
